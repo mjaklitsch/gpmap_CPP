@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		3E25237B24C7750F00FBD880 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25237A24C7750F00FBD880 /* main.cpp */; };
+		3E25239C24C775B000FBD880 /* PolygonCalculations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25238424C775AF00FBD880 /* PolygonCalculations.cpp */; };
+		3E25239D24C775B000FBD880 /* Phenotype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25238524C775AF00FBD880 /* Phenotype.cpp */; };
+		3E25239E24C775B000FBD880 /* SensorDot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25238724C775AF00FBD880 /* SensorDot.cpp */; };
+		3E25239F24C775B000FBD880 /* Robot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25238D24C775AF00FBD880 /* Robot.cpp */; };
+		3E2523A024C775B000FBD880 /* Cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25238F24C775AF00FBD880 /* Cell.cpp */; };
+		3E2523A124C775B000FBD880 /* RunSimulation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239124C775B000FBD880 /* RunSimulation.cpp */; };
+		3E2523A224C775B000FBD880 /* SensorArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239224C775B000FBD880 /* SensorArray.cpp */; };
+		3E2523A324C775B000FBD880 /* ConnectionWeight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239424C775B000FBD880 /* ConnectionWeight.cpp */; };
+		3E2523A424C775B000FBD880 /* Connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239524C775B000FBD880 /* Connection.cpp */; };
+		3E2523A524C775B000FBD880 /* random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239624C775B000FBD880 /* random.cpp */; };
+		3E2523A624C775B000FBD880 /* GenerateGene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239724C775B000FBD880 /* GenerateGene.cpp */; };
+		3E2523A724C775B000FBD880 /* Genotype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E25239824C775B000FBD880 /* Genotype.cpp */; };
+		3EA41F2824C8D0BD00F0D852 /* GlobalVariables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3EA41F2724C8D0BD00F0D852 /* GlobalVariables.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +38,32 @@
 /* Begin PBXFileReference section */
 		3E25237724C7750F00FBD880 /* gpmap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gpmap; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E25237A24C7750F00FBD880 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3E25238124C775AF00FBD880 /* SensorArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorArray.h; sourceTree = "<group>"; };
+		3E25238324C775AF00FBD880 /* GenerateGene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenerateGene.h; sourceTree = "<group>"; };
+		3E25238424C775AF00FBD880 /* PolygonCalculations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PolygonCalculations.cpp; sourceTree = "<group>"; };
+		3E25238524C775AF00FBD880 /* Phenotype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Phenotype.cpp; sourceTree = "<group>"; };
+		3E25238624C775AF00FBD880 /* PolygonCalculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonCalculations.h; sourceTree = "<group>"; };
+		3E25238724C775AF00FBD880 /* SensorDot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SensorDot.cpp; sourceTree = "<group>"; };
+		3E25238924C775AF00FBD880 /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = random.h; sourceTree = "<group>"; };
+		3E25238A24C775AF00FBD880 /* ConnectionWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionWeight.h; sourceTree = "<group>"; };
+		3E25238B24C775AF00FBD880 /* SensorDot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorDot.h; sourceTree = "<group>"; };
+		3E25238C24C775AF00FBD880 /* Robot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Robot.h; sourceTree = "<group>"; };
+		3E25238D24C775AF00FBD880 /* Robot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Robot.cpp; sourceTree = "<group>"; };
+		3E25238E24C775AF00FBD880 /* RunSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSimulation.h; sourceTree = "<group>"; };
+		3E25238F24C775AF00FBD880 /* Cell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Cell.cpp; sourceTree = "<group>"; };
+		3E25239024C775B000FBD880 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		3E25239124C775B000FBD880 /* RunSimulation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RunSimulation.cpp; sourceTree = "<group>"; };
+		3E25239224C775B000FBD880 /* SensorArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SensorArray.cpp; sourceTree = "<group>"; };
+		3E25239324C775B000FBD880 /* Genotype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genotype.h; sourceTree = "<group>"; };
+		3E25239424C775B000FBD880 /* ConnectionWeight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConnectionWeight.cpp; sourceTree = "<group>"; };
+		3E25239524C775B000FBD880 /* Connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Connection.cpp; sourceTree = "<group>"; };
+		3E25239624C775B000FBD880 /* random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = random.cpp; sourceTree = "<group>"; };
+		3E25239724C775B000FBD880 /* GenerateGene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenerateGene.cpp; sourceTree = "<group>"; };
+		3E25239824C775B000FBD880 /* Genotype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Genotype.cpp; sourceTree = "<group>"; };
+		3E25239924C775B000FBD880 /* Connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connection.h; sourceTree = "<group>"; };
+		3E25239A24C775B000FBD880 /* Phenotype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phenotype.h; sourceTree = "<group>"; };
+		3EA41F2624C8D0BA00F0D852 /* GlobalVariables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GlobalVariables.h; path = /Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/GlobalVariables.h; sourceTree = "<absolute>"; };
+		3EA41F2724C8D0BD00F0D852 /* GlobalVariables.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GlobalVariables.cpp; path = /Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/GlobalVariables.cpp; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +96,33 @@
 		3E25237924C7750F00FBD880 /* gpmap */ = {
 			isa = PBXGroup;
 			children = (
+				3EA41F2724C8D0BD00F0D852 /* GlobalVariables.cpp */,
+				3EA41F2624C8D0BA00F0D852 /* GlobalVariables.h */,
 				3E25237A24C7750F00FBD880 /* main.cpp */,
+				3E25238F24C775AF00FBD880 /* Cell.cpp */,
+				3E25239024C775B000FBD880 /* Cell.h */,
+				3E25239524C775B000FBD880 /* Connection.cpp */,
+				3E25239924C775B000FBD880 /* Connection.h */,
+				3E25239424C775B000FBD880 /* ConnectionWeight.cpp */,
+				3E25238A24C775AF00FBD880 /* ConnectionWeight.h */,
+				3E25239724C775B000FBD880 /* GenerateGene.cpp */,
+				3E25238324C775AF00FBD880 /* GenerateGene.h */,
+				3E25239824C775B000FBD880 /* Genotype.cpp */,
+				3E25239324C775B000FBD880 /* Genotype.h */,
+				3E25238524C775AF00FBD880 /* Phenotype.cpp */,
+				3E25239A24C775B000FBD880 /* Phenotype.h */,
+				3E25238424C775AF00FBD880 /* PolygonCalculations.cpp */,
+				3E25238624C775AF00FBD880 /* PolygonCalculations.h */,
+				3E25239624C775B000FBD880 /* random.cpp */,
+				3E25238924C775AF00FBD880 /* random.h */,
+				3E25238D24C775AF00FBD880 /* Robot.cpp */,
+				3E25238C24C775AF00FBD880 /* Robot.h */,
+				3E25239124C775B000FBD880 /* RunSimulation.cpp */,
+				3E25238E24C775AF00FBD880 /* RunSimulation.h */,
+				3E25239224C775B000FBD880 /* SensorArray.cpp */,
+				3E25238124C775AF00FBD880 /* SensorArray.h */,
+				3E25238724C775AF00FBD880 /* SensorDot.cpp */,
+				3E25238B24C775AF00FBD880 /* SensorDot.h */,
 			);
 			path = gpmap;
 			sourceTree = "<group>";
@@ -120,6 +185,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E25237B24C7750F00FBD880 /* main.cpp in Sources */,
+				3E25239E24C775B000FBD880 /* SensorDot.cpp in Sources */,
+				3E2523A724C775B000FBD880 /* Genotype.cpp in Sources */,
+				3E25239C24C775B000FBD880 /* PolygonCalculations.cpp in Sources */,
+				3E2523A024C775B000FBD880 /* Cell.cpp in Sources */,
+				3E2523A124C775B000FBD880 /* RunSimulation.cpp in Sources */,
+				3E25239D24C775B000FBD880 /* Phenotype.cpp in Sources */,
+				3E2523A224C775B000FBD880 /* SensorArray.cpp in Sources */,
+				3EA41F2824C8D0BD00F0D852 /* GlobalVariables.cpp in Sources */,
+				3E2523A624C775B000FBD880 /* GenerateGene.cpp in Sources */,
+				3E25239F24C775B000FBD880 /* Robot.cpp in Sources */,
+				3E2523A524C775B000FBD880 /* random.cpp in Sources */,
+				3E2523A424C775B000FBD880 /* Connection.cpp in Sources */,
+				3E2523A324C775B000FBD880 /* ConnectionWeight.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

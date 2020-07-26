@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:gpmap.xcodeproj">
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/GlobalVariables.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/GlobalVariables.h">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
