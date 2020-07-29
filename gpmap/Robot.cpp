@@ -59,22 +59,6 @@ void printboolMatrix(std::vector<std::vector<bool> > boolMatrix) {
     }
 }
 
-//SensorArray* Robot::sensorArray;
-//Phenotype* Robot::phenotype;
-//CellArray *Robot::cellArray;
-//int Robot::numberOfCells = 0;
-//
-//int Robot::numberOfNeurons = 0;
-//int Robot::numberOfPhotoSensors = 0;
-//int Robot::numberOfIRSensors = 0;
-//int Robot::numberOfRightMotors = 0;
-//int Robot::numberOfLeftMotors = 0;
-//
-//std::vector<std::vector<int> > Robot::attachmentsBySensorIndex; // x is sensor index, y will be an array of attachments by their cell array index
-//std::vector<std::vector<bool> > Robot::cellConnections;
-//std::vector<std::vector<float> > Robot::cellConnectionWeights;
-
-
 Robot::Robot(SensorArray *tempSensorArray, Phenotype *tempPhenotype, CellArray *tempCellArray) {
     sensorArray = tempSensorArray;
     phenotype = tempPhenotype;
@@ -112,39 +96,18 @@ Robot::Robot(SensorArray *tempSensorArray, Phenotype *tempPhenotype, CellArray *
     for (int i = 0; i < numberOfSensors; i++) {
         std::vector<int> connectionArray = sensorArray->sensorDotArray[i].connections;
         attachmentsBySensorIndex.push_back(connectionArray);
-        
     }
-    
-    // cellConnections = new bool[numberOfCells][numberOfCells];
-    // cellConnectionWeights = new float[numberOfCells][numberOfCells];
-    
-    
-    //    cellConnectionWeights.resize(numberOfCells);
-    //    cellConnections.resize(numberOfCells);
-    //    for (int x = 0; x < numberOfCells; x++) {
-    //        cellConnectionWeights[x].resize(numberOfCells);
-    //        cellConnections[x].resize(numberOfCells);
-    //        for (int y = 0; y < numberOfCells; y++) {
-    //            cellConnectionWeights[x][y] = 0.0;
-    //            cellConnections[x][y] = false;
-    //        }
-    //    }
     
     cellConnections.resize(numberOfCells);
     cellConnectionWeights.resize(numberOfCells);
     for (int x = 0; x < numberOfCells; x++) {
         for (int y = 0; y < numberOfCells; y++) {
             if (phenotype->hasSpecificDirectionalConnection(x, y)) {
-                cellConnections[x].push_back(true);
-                float connectionWeight = phenotype->getSpecificDirectionalConnectionWeight(x, y);
-                cellConnectionWeights[x].push_back(connectionWeight);
-                //            } else if (phenotype->hasSpecificDirectionalConnection(y, x)) {
-                //                cellConnections[y].push_back(true);
-                //                float connectionWeight = phenotype->getSpecificDirectionalConnectionWeight(y, x);
-                //                cellConnectionWeights[y].push_back(connectionWeight);
+                cellConnections[x].emplace_back(true);
+                cellConnectionWeights[x].emplace_back(phenotype->getSpecificDirectionalConnectionWeight(x, y));
             } else {
-                cellConnections[x].push_back(false);
-                cellConnectionWeights[x].push_back(0.0);
+                cellConnections[x].emplace_back(false);
+                cellConnectionWeights[x].emplace_back(0.0);
             }
         }
     }

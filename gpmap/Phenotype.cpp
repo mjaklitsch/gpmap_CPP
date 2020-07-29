@@ -24,15 +24,10 @@ Phenotype::Phenotype(int minNeurons, int maxNeurons, int minPhotoSensors,
     } else{
         
         int neurons = intRandom(minNeurons, maxNeurons);
-        printf("neurons %d ",neurons);
         int photoSensors = intRandom(minPhotoSensors, maxPhotoSensors);
-        printf("photoSensors %d ",photoSensors);
         int irSensors = intRandom(minIRSensors, maxIRSensors);
-        printf("irSensors %d ",irSensors);
         int leftMotors = intRandom(minLeftMotors, maxLeftMotors);
-        printf("leftMotors %d ",leftMotors);
         int rightMotors = intRandom(minRightMotors, maxRightMotors);
-        printf("rightMotors %d\n",rightMotors);
         
         numberOfCells = neurons + photoSensors + irSensors + leftMotors + rightMotors;
         global::numberOfCellsCreated = numberOfCells; //global record
@@ -44,39 +39,41 @@ Phenotype::Phenotype(int minNeurons, int maxNeurons, int minPhotoSensors,
         //    cellArray.resize(numberOfCellsCreated);
         
         for (int i = 0; i < neurons; i++) {
-            Cell nextCell = Cell("N", (arrayIndex + i));
-            cellArray.add(nextCell);
+//            Cell nextCell = Cell("N", (arrayIndex + i));
+//            cellArray.add(nextCell);
+            cellArray.emplace("N", (arrayIndex + i));
         }
         
         arrayIndex += neurons;
         
         for (int i = 0; i < photoSensors; i++) {
-            Cell nextCell = Cell("P", (arrayIndex + i));
-            cellArray.add(nextCell);
+//            Cell nextCell = Cell("P", (arrayIndex + i));
+//            cellArray.add(nextCell);
+            cellArray.emplace("P", (arrayIndex + i));
         }
         
         arrayIndex += photoSensors;
         
         for (int i = 0; i < irSensors; i++) {
-            Cell nextCell = Cell("R", (arrayIndex + i));
-            cellArray.add(nextCell);
+//            Cell nextCell = Cell("R", (arrayIndex + i));
+//            cellArray.add(nextCell);
+            cellArray.emplace("R", (arrayIndex + i));
         }
         
         arrayIndex += irSensors;
         
         for (int i = 0; i < leftMotors; i++) {
-            Cell nextCell = Cell("LM", (arrayIndex + i));
-            cellArray.add(nextCell);
+//            Cell nextCell = Cell("LM", (arrayIndex + i));
+//            cellArray.add(nextCell);
+            cellArray.emplace("LM", (arrayIndex + i));
         }
         arrayIndex += leftMotors;
         
         for (int i = 0; i < rightMotors; i++) {
-            Cell nextCell = Cell("RM", (arrayIndex + i));
-            cellArray.add(nextCell);
+//            Cell nextCell = Cell("RM", (arrayIndex + i));
+//            cellArray.add(nextCell);
+            cellArray.emplace("RM", (arrayIndex + i));
         }
-//        printf("cell index at cellArray index 0: ");
-        std::cout << cellArray.getCell(0).getIndex()  <<'\n';
-//        printf("size of cellarray %d\n", cellArray.getSize());
         
         arrayIndex += rightMotors;
     }
@@ -84,8 +81,8 @@ Phenotype::Phenotype(int minNeurons, int maxNeurons, int minPhotoSensors,
 
 void Phenotype::addConnection(int i, int j) {
     cellArray.addIndexesOfConnectionToCells(i, j);
-    Connection newConnection = Connection(i, j, &cellArray);
-    connectionVector.push_back(newConnection);
+//    Connection newConnection = Connection(i, j, &cellArray);
+    connectionVector.emplace_back(Connection(i, j, &cellArray));
 }
 
 void Phenotype::moveCells() {

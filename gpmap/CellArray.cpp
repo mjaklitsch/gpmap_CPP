@@ -19,6 +19,10 @@ void CellArray::add(Cell& cell){
     subArray.push_back(cell);
 }
 
+void CellArray::emplace(std::string type, int index){
+    subArray.emplace_back(Cell(type, index));
+}
+
 Cell CellArray::getCell(int index){
     return subArray.at(index);
 }
@@ -66,7 +70,8 @@ void CellArray::addIndexesOfConnectionToCells(int index1, int index2){
 
 void CellArray::printCellArray(){
     if(global::printStuff){
-        printf("CellArray scaffoldCellArray;\n\n");
+        printf("\nC++ build of this execution\'s CellArray, go to CellArrayScaffold.cpp, paste output in CellArrayScaffold(),\nthen run in test mode by passing any argument to main to repeat this simulation.\n");
+        printf("\nCellArray scaffoldCellArray;\n\n");
         for (int i =0; i<subArray.size(); i++) {
             subArray.at(i).printCell(i);
             printf("scaffoldCellArray.add(C%d);\n", i);

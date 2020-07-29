@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 
+
 using namespace std;
 class CellArray {
     
@@ -19,6 +20,7 @@ class CellArray {
 public:
     int getSize();
     void add(Cell& cell);
+    void emplace(std::string type, int index);
     Cell getCell(int index);
     bool isMotor(int index);
     bool isSensor(int index);

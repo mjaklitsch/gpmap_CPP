@@ -32,7 +32,7 @@ void SensorArray::recordIntersections(Phenotype *phenotype) {
 //                              i) == sensorDotArray[sensorIndex].connections.end()) { // if we dont find i in the connections that have been made
                 
                 phenotype->cellArray.setConnectedToSensor(i,true);
-                (sensorDotArray[sensorIndex].connections).push_back(i);
+                (sensorDotArray[sensorIndex].connections).emplace_back(i);
 //                }
             }
         }
@@ -59,6 +59,6 @@ void SensorArray::initializeSensors() {
         x = polarXAngle(i);
         y = polarYAngle(i);
         
-        sensorDotArray.push_back(SensorDot(x, y));
+        sensorDotArray.emplace_back(SensorDot(x, y));
     }
 }
