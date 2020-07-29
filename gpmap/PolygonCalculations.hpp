@@ -1,4 +1,5 @@
-#include "Cell.h"
+#include "Cell.hpp"
+#include "CellArray.hpp"
 
 #ifndef POLYGONALCALCULATIONS_H_INCLUDED
 #define POLYGONALCALCULATIONS_H_INCLUDED
@@ -17,6 +18,6 @@ float *getMidpoint(float x1, float y1, float x2, float y2);
 
 int getIndexOfClosestSensorDotToTheta(float theta);
 
-bool isCellOverlappingWithPolygon(Cell cell);
+bool isCellOverlappingWithPolygon(int cellIndex, CellArray* cellArray);
 
 #endif

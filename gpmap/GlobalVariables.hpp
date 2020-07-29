@@ -3,7 +3,11 @@
 #ifndef TIMERVARIABLES_H_INCLUDED
 #define TIMERVARIABLES_H_INCLUDED
 
+namespace global {
 extern int numberOfCellsCreated;
+extern bool printStuff;
+}
+
 
 namespace timer{
 extern int ticks;
@@ -15,11 +19,5 @@ extern int currentTick;
 extern int currentFrame;
 };
 
-namespace locks{
-extern std::atomic<int> moveCellsLock;
-extern std::atomic<int> recordIntersectionsLock;
-extern std::atomic<int> updateAllConnectionPositionsLock;
-extern std::atomic<int> recordSensorIntersectionsLock;
-}
 
 #endif

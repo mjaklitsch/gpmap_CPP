@@ -1,5 +1,5 @@
-#include "PolygonCalculations.h"
-#include "SensorArray.h"
+#include "PolygonCalculations.hpp"
+#include "SensorArray.hpp"
 #include <cmath>
 #include <iostream>
 
@@ -54,27 +54,12 @@ float getPolygonDistanceFromOriginAtTheta(float theta) {
 int getIndexOfClosestSensorDotToTheta(float theta) {
     int inverseIndex = round(theta / polygonalTriangleInnerTheta);// the sensors are indexed incrementally clockwise whereas...
     if (inverseIndex == 0) { // ...angles increase counterclockwise (in an attempt to mimick the unit circle)...
-        
-        printf("closest index is 0\n");
         return 0;
     } else {
-        printf("closest index is %d\n", (numberOfSensors-inverseIndex));
         return numberOfSensors - inverseIndex; // ...which makes this inverse measurement necessary
     }
 }
 
-//bool isCellOverlappingWithPolygon(Cell cell) { // deprecated because it doesnt actually work
-
-//  float centerOfCircleDistanceFromOrigin = distanceBetween(cell.xPos, cell.yPos, 0, 0);
-//  float edgeOfCircleDistanceFromOrigin = centerOfCircleDistanceFromOrigin + cell.radius;
-//  float polygonDistanceFromOrigin = getPolygonDistanceFromOriginAtAngle(degrees(cell.genotype.theta));
-
-//  if (edgeOfCircleDistanceFromOrigin >= polygonDistanceFromOrigin) {
-//    return true;
-//  } else {
-//    return false;
-//  }
-//}
 float getxCoordinateOfPolygonAtTheta(float theta) {
     float xCoordOfPolygon = getPolygonDistanceFromOriginAtTheta(theta) * cos(theta);
     return xCoordOfPolygon;
@@ -85,18 +70,18 @@ float getyCoordinateOfPolygonAtTheta(float theta) {
     return yCoordOfPolygon;
 }
 
-bool isCellOverlappingWithPolygon(Cell cell) {
-    float theta = cell.genotype.theta;
+bool isCellOverlappingWithPolygon(int cellIndex, CellArray* cellArray) {
+    float theta = cellArray->getTheta(cellIndex);
     float xCoordOfPolygonAtTheta = getxCoordinateOfPolygonAtTheta(theta);
     float yCoordOfPolygonAtTheta = getyCoordinateOfPolygonAtTheta(theta);
-    float thetaOfCircleTangentWithPolygon = abs(fmod(theta,polygonalTriangleInnerTheta)-(polygonalTriangleInnerTheta/2));
+    float thetaOfCircleTangentWithPolygon = abs(fmod(theta, polygonalTriangleInnerTheta)-(polygonalTriangleInnerTheta / 2));
     
     float cosThetaOfTangent = cos(thetaOfCircleTangentWithPolygon);
     
-    float distanceFromTargetPointOfPolygonToCenterOfCell = distanceBetween(cell.xPos, cell.yPos, xCoordOfPolygonAtTheta, yCoordOfPolygonAtTheta);
+    float distanceFromTargetPointOfPolygonToCenterOfCell = distanceBetween(cellArray->getXPos(cellIndex), cellArray->getYPos(cellIndex), xCoordOfPolygonAtTheta, yCoordOfPolygonAtTheta);
     float distanceFromClosestPointOfPolygonToCenterOfCell = distanceFromTargetPointOfPolygonToCenterOfCell * cosThetaOfTangent;
     
-    if (distanceFromClosestPointOfPolygonToCenterOfCell <= cell.radius) {
+    if (distanceFromClosestPointOfPolygonToCenterOfCell <= cellArray->getRadius(cellIndex)) {
         return true;
     } else {
         return false;

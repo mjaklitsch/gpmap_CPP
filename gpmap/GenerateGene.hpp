@@ -1,4 +1,4 @@
-#include "Genotype.h"
+#include "Gene.hpp"
 #include <string>
 
 #ifndef GENERATEGENE_H_INCLUDED
@@ -15,8 +15,8 @@ extern int maxSpeed;
 extern int minGrowthRate;
 extern int maxGrowthRate;
 
-Genotype returnRandomNewGenotype(std::string cellType);
+Gene returnRandomNewGenotype(std::string cellType);
 
-void printGenotype(Genotype genotype);
+void printGenotype(Gene gene);
 
 #endif

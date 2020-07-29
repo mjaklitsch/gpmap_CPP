@@ -1,12 +1,16 @@
-#include "RunSimulation.h"
+#include "RunSimulation.hpp"
 #include <iostream>
+#include <chrono>
 
 
 
-int main(void){
-
+int main(int argc, char* argv[]){
+    using namespace std::chrono;
+    high_resolution_clock::time_point t1 = high_resolution_clock::now();
+    
+    srand((int)time(NULL));
     // Phenotype Generation Variables
-    int minNeurons = 1;
+    int minNeurons = 2;
     int minPhotosensors = 2;
     int minIRSensors = 2;
     int minLeftMotors = 1;
@@ -17,12 +21,27 @@ int main(void){
     int maxIRSensors = 4;
     int maxLeftMotors = 1;
     int maxRightMotors = 1;
+    bool testMode;
+    if(argc > 1){
+        testMode = true;
+        printf("TEST MODE!%d\n",argc);
+    } else {
+        testMode = false;
+    }
     
     runSimulation(minNeurons, maxNeurons, minPhotosensors,
                   maxPhotosensors, minIRSensors, maxIRSensors,
                   minLeftMotors, maxLeftMotors, minRightMotors,
-                  maxRightMotors);
+                  maxRightMotors, testMode);
     
+    if(testMode){
+        printf("TEST MODE!\n");
+    }
+    
+    high_resolution_clock::time_point t2 = high_resolution_clock::now();
+    duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
+    
+    printf("Execution time of program is %f seconds\n", time_span.count());
     return 0;
 }
 // g++ TimerVariables.o RunSimulation.o Cell.o ConnectionWeight.o SensorDot.o SensorArray.o Robot.o random.o PolygonCalculations.o Phenotype.o Connection.o Genotype.o GenerateGene.o main.o -o gpmap

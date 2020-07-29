@@ -1,49 +1,47 @@
-#include "SensorArray.h"
-#include "Phenotype.h"
-#include "PolygonCalculations.h"
-#include "GlobalVariables.h"
+#include "SensorArray.hpp"
+#include "Phenotype.hpp"
+#include "PolygonCalculations.hpp"
+#include "GlobalVariables.hpp"
 #include <cmath>
 #include <algorithm>
 #include <iostream>
 
-// double PI = 2*acos(0.0);
-
-using namespace locks;
 
 int numberOfSensors = 8; // 30 is the max for unknown reasons
 
-std::vector<SensorDot> SensorArray::sensorDotArray;
+//std::vector<SensorDot> SensorArray::sensorDotArray;
 
 SensorArray::SensorArray() {
     // nothing needed here yet, this class exists for organization
 }
 
 void SensorArray::recordIntersections(Phenotype *phenotype) {
-    long cellsInPhenotype = sizeof(&phenotype->cellArray) / sizeof(Cell);
-    
-    for (int i = 0; i < cellsInPhenotype; i++) {
-        if (isCellOverlappingWithPolygon(phenotype->cellArray[i])) {
-            float tempTheta = phenotype->cellArray[i].genotype.theta;
-            float theta;
-            if (tempTheta < 0) { // add 2 PI to get rid of negative theta
-                theta = tempTheta + (2 * M_PI);
-            } else {
-                theta = tempTheta;
-            }
-            printf("Cell %d\n", i);
-            int sensorIndex = getIndexOfClosestSensorDotToTheta(theta);
-            if (std::find(sensorDotArray[sensorIndex].connections.begin(),
-                          sensorDotArray[sensorIndex].connections.end(),
-                          i) == sensorDotArray[sensorIndex].connections.end()) {
+    for (int i = 0; i < global::numberOfCellsCreated; i++) {
+        if (!phenotype->cellArray.getConnectedToSensor(i)){
+            if (isCellOverlappingWithPolygon(i, &(phenotype->cellArray))) {
+                float tempTheta = phenotype->cellArray.getTheta(i);
+                float theta;
+                if (tempTheta < 0) { // add 2 PI to get rid of negative theta
+                    theta = tempTheta + (2 * M_PI);
+                } else {
+                    theta = tempTheta;
+                }
+                int sensorIndex = getIndexOfClosestSensorDotToTheta(theta);
+//                if (std::find(sensorDotArray[sensorIndex].connections.begin(),
+//                              sensorDotArray[sensorIndex].connections.end(),
+//                              i) == sensorDotArray[sensorIndex].connections.end()) { // if we dont find i in the connections that have been made
+                
+                phenotype->cellArray.setConnectedToSensor(i,true);
                 (sensorDotArray[sensorIndex].connections).push_back(i);
+//                }
             }
         }
     }
-//    while(i<cellsInPhenotype)
-//        //spin
-//        ;
-//    locks::moveCellsLock = 0;
-    printf("g");
+    //    while(i<cellsInPhenotype)
+    //        //spin
+    //        ;
+    //    locks::moveCellsLock = 0;
+//    printf("g");
     
 }
 
@@ -61,9 +59,6 @@ void SensorArray::initializeSensors() {
         x = polarXAngle(i);
         y = polarYAngle(i);
         
-        int sensorArrayIndex = int(i/polygonalTriangleInnerAngle);
-        sensorDotArray[sensorArrayIndex] = SensorDot(x, y);
+        sensorDotArray.push_back(SensorDot(x, y));
     }
-//    while(i<360);
-    locks::moveCellsLock = 0;
 }

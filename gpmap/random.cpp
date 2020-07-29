@@ -1,4 +1,4 @@
-#include "random.h"
+#include "random.hpp"
 #include <iostream>
 #include <unistd.h>
 #include <assert.h>

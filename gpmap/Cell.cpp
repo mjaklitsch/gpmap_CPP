@@ -1,27 +1,27 @@
-#include "Cell.h"
-#include "GenerateGene.h"
-#include "GlobalVariables.h"
+#include "Cell.hpp"
+#include "GenerateGene.hpp"
+#include "GlobalVariables.hpp"
 #include <iostream>
 #include <string>
 #include <cmath>
 
 using namespace timer;
 
-int Cell::index = -1;
-// ArrayList<Connection> cellConnections = new ArrayList<Connection>();
-
-Genotype Cell::genotype;
-float Cell::xPos = 0;
-float Cell::yPos = 0;
-float Cell::diameter = 0;
-float Cell::radius = 0;
-
-float Cell::xSpeed = 0;
-float Cell::ySpeed = 0;
-float Cell::growthRate = 0;
-
-bool Cell::doneMoving = false;
-bool Cell::doneGrowing = false;
+//int Cell::index = 0;
+//// ArrayList<Connection> cellConnections = new ArrayList<Connection>();
+//
+//Gene Cell::gene;
+//float Cell::xPos = {0.0};
+//float Cell::yPos;
+//float Cell::diameter;
+//float Cell::radius;
+//
+//float Cell::xSpeed;
+//float Cell::ySpeed;
+//float Cell::growthRate;
+//
+//bool Cell::doneMoving;
+//bool Cell::doneGrowing;
 
 Cell::Cell(){
 }
@@ -31,66 +31,200 @@ Cell::Cell(){
 //    index = C2.index;
 //}
 
+Cell::Cell(Gene tempGene, int tempIndex){
+    gene = tempGene;
+    index = tempIndex;
+    xPos = 0;
+    yPos = 0;
+    diameter = 0;
+    radius = 0;
+    
+    xSpeed = 0;
+    ySpeed = 0;
+    growthRate = 0;
+    
+    doneMoving = false;
+    doneGrowing = false;
+    connectedToSensor = false;
+}
+
 Cell::Cell(std::string cellType, int tempIndex) {
-  genotype = returnRandomNewGenotype(cellType);
-  index = tempIndex;
+    gene = returnRandomNewGenotype(cellType);
+    index = tempIndex;
+    xPos = 0;
+    yPos = 0;
+    diameter = 0;
+    radius = 0;
+    
+    xSpeed = 0;
+    ySpeed = 0;
+    growthRate = 0;
+    
+    doneMoving = false;
+    doneGrowing = false;
+    connectedToSensor = false;
 }
 
 //Cell::~Cell(){
 //};
 
 bool Cell::isMotor() {
-  if (genotype.cellType == "LM" || genotype.cellType == "RM") {
-    return true;
-  } else {
-    return false;
-  }
+    if (getCellType() == "LM" || getCellType() == "RM") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool Cell::isSensor() {
-  if (genotype.cellType == "R" || genotype.cellType == "P") {
-    return true;
-  } else {
-    return false;
-  }
+    if (getCellType() == "R" || getCellType() == "P") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool Cell::isNeuron() {
-  if (genotype.cellType == "N") {
-    return true;
-  } else {
-    return false;
-  }
+    if (getCellType() == "N") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void Cell::setCellSpeedAndGrowth() {
-  if (timer::currentTick > genotype.growthDelay) {
-    growthRate = (genotype.growthRate / timer::actionSpread);
-  }
-
-  if (timer::currentTick > genotype.movementDelay) {
-    float speed = (genotype.speed / timer::actionSpread);
-    xSpeed = speed * cos(genotype.theta);
-    ySpeed = speed * sin(genotype.theta);
-  }
+//    (index == 0)? printf("current tick: %d \n", timer::currentTick):NULL;
+    if(growthRate == 0){
+        if (timer::currentTick > gene.getGrowthDelay()) {
+            growthRate = (gene.getGrowthRate() / timer::actionSpread);
+        }
+    }
+    if (timer::currentTick > gene.getMovementDelay()) {
+        float speed = (gene.getSpeed() / timer::actionSpread);
+        xSpeed = speed * cos(gene.getTheta());
+        ySpeed = speed * sin(gene.getTheta());
+    }
 }
 
 void Cell::moveAndMorphCell() {
-  if (!doneMoving && (timer::currentTick - genotype.movementDelay < genotype.movementDuration)) {
-    xPos += xSpeed;
-    yPos -= ySpeed;
-  } else {
-    doneMoving = true;
-  }
-
-  if (!doneGrowing && (timer::currentTick - genotype.growthDelay < genotype.growthDuration)) {
-    diameter += growthRate;
-    radius = diameter/2;
-  } else {
-    doneGrowing = true;
-  }
+    if (!doneMoving && (timer::currentTick - gene.getMovementDelay() < gene.getMovementDuration())) {
+        xPos += xSpeed;
+        yPos -= ySpeed;
+    } else {
+        doneMoving = true;
+    }
+    
+    if (!doneGrowing && (timer::currentTick - gene.getGrowthDelay() < gene.getGrowthDuration())) {
+        diameter += growthRate;
+        radius = diameter/2;
+    } else {
+        doneGrowing = true;
+    }
 }
 
 void Cell::printGenes() {
-  printGenotype(genotype);
+    printGenotype(gene);
+}
+
+int Cell::getIndex(){
+    return index;
+}
+std::string Cell::getCellType(){
+    return gene.getCellType();
+}
+Gene Cell::getGene(){
+    return gene;
+}
+float Cell::getTheta(){
+    return gene.getTheta();
+}
+float Cell::getXPos(){
+    return xPos;
+}
+float Cell::getYPos(){
+    return yPos;
+}
+float Cell::getDiameter(){
+    return diameter;
+}
+float Cell::getRadius(){
+    return radius;
+}
+float Cell::getXSpeed(){
+    return xSpeed;
+}
+float Cell::getYSpeed(){
+    return ySpeed;
+}
+float Cell::getGrowthRate(){
+    return growthRate;
+}
+bool Cell::getDoneMoving(){
+    return doneMoving;
+}
+bool Cell::getDoneGrowing(){
+    return doneGrowing;
+}
+bool Cell::getConnectedToSensor(){
+    return connectedToSensor;
+}
+
+bool Cell::isConnectedToIndex(int index){
+    for(int i = 0; i < connectedTo.size(); i++){
+        if(connectedTo.at(i) == index){
+            return true;
+        }
+    }
+    return false;
+}
+
+void Cell::setIndex(int i){
+    index = i;
+}
+void Cell::setGene(Gene g){
+    gene = g;
+}
+void Cell::setXPos(float x){
+    xPos = x;
+}
+void Cell::setYPos(float y){
+    yPos = y;
+}
+void Cell::setDiameter(float d){
+    diameter = d;
+}
+void Cell::setRadius(float r){
+    radius = r;
+}
+void Cell::setXSpeed(float dx){
+    xSpeed = dx;
+}
+void Cell::setYSpeed(float dy){
+    ySpeed = dy;
+}
+void Cell::setGrowthRate(float ds){
+    growthRate = ds;
+}
+void Cell::setDoneMoving(bool dmoving){
+    doneMoving = dmoving;
+}
+void Cell::setDoneGrowing(bool dgrowing){
+    doneGrowing = dgrowing;
+}
+void Cell::setConnectedToSensor(bool connected){
+    connectedToSensor = connected;
+}
+void Cell::addConnection(int cellIndex){
+    connectedTo.push_back(cellIndex);
+}
+void Cell::printCell(int index){
+    printf("Gene G%d = Gene(\"%s\", ", index,gene.getCellType().c_str());
+    printf("%f, ", gene.getTheta());
+    printf("%f, ", gene.getGrowthDelay());
+    printf("%f, ", gene.getGrowthRate());
+    printf("%f, ", gene.getGrowthDuration());
+    printf("%f, ", gene.getSpeed());
+    printf("%f, ", gene.getMovementDelay());
+    printf("%f);\n", gene.getMovementDuration());
+    printf("Cell C%d = Cell(G%d, %d);\n",index, index, index);
 }

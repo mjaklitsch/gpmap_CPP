@@ -5,6 +5,6 @@
 
 void runSimulation(int minN, int maxN, int minP, int maxP,
   int minIR, int maxIR, int minLM, int maxLM, int minRM,
-  int maxRM);
+                   int maxRM, bool testMode);
 
 #endif

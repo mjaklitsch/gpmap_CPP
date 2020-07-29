@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/CellArrayScaffold.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/CellArrayScaffold.hpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/CellArray.cpp">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/CellArray.hpp">
+   </FileRef>
+   <FileRef
       location = "group:/Users/mikejaklitsch/Development_Files_and_Apps/URSI/gpmap/gpmap/GlobalVariables.cpp">
    </FileRef>
    <FileRef
