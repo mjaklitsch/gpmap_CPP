@@ -1,5 +1,5 @@
 #include "SensorArray.hpp"
-#include "Phenotype.hpp" //includes "Cell.h"
+#include "Genotype.hpp" //includes "Cell.h"
 #include <vector>
 
 #ifndef ROBOT_H_INCLUDED
@@ -11,10 +11,10 @@ void printIntegerMatrix(std::vector<std::vector<int> > integerMatrix);
 void printFloatMatrix(std::vector<std::vector<float> > floatMatrix);
 void printboolMatrix(std::vector<std::vector<bool> > boolMatrix);
 
-class Robot {
+class Phenotype {
 public:
      SensorArray* sensorArray;
-     Phenotype* phenotype;
+     Genotype* phenotype;
      int numberOfCells;
      CellArray *cellArray;
     
@@ -29,7 +29,7 @@ public:
      std::vector<std::vector<float> > cellConnectionWeights;
     
     
-    Robot(SensorArray* tempSensorArray, Phenotype* tempPhenotype, CellArray *tempCellArray);
+    Phenotype(SensorArray* tempSensorArray, Genotype* tempPhenotype, CellArray *tempCellArray);
     
     void printRobot();
 };

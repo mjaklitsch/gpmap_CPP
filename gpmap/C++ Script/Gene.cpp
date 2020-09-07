@@ -1,16 +1,6 @@
 #include "Gene.hpp"
 #include <iostream>
 
-
-//std::string Gene::cellType;
-//float Gene::theta;
-//float Gene::growthDelay;
-//float Gene::growthRate;
-//float Gene::growthDuration;
-//float Gene::speed;
-//float Gene::movementDelay;
-//float Gene::movementDuration;
-
 Gene::Gene(){
     
 }

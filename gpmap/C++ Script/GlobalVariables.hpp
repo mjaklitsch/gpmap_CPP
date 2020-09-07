@@ -8,7 +8,6 @@ extern int numberOfCellsCreated;
 extern bool printStuff;
 }
 
-
 namespace timer{
 extern int ticks;
 extern int framesPerTick;

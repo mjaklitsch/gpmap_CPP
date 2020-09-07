@@ -21,8 +21,10 @@ int getConnectionDirection(int cellFromIndex, int cellToIndex, CellArray* cellAr
     // range 1: 270 - 360, range 2: 0 - 90, accounts for a full 180 degrees counterclockwise
     // range 3: 90 - 270, range 4: also 90 - 270 as no overlap with the boundary occurs, accounts for 180 degrees clockwise
     
+    // A very angular unit circle diagram:
+    //
     //        90
-    //      / | \      // a very angular unit circle diagram
+    //      / | \
     // 180 ------- 0/360
     //      \ | /
     //       270
@@ -68,8 +70,8 @@ int getConnectionDirection(int cellFromIndex, int cellToIndex, CellArray* cellAr
 
 float getConnectionWeight(int cellFromIndex, int cellToIndex, CellArray* cellArray) {
     float weight;
-    //if (cellTo->isSensor()) {
-    float cellToDiameter =cellArray->getDiameter(cellToIndex);
+    
+    float cellToDiameter = cellArray->getDiameter(cellToIndex);
     float cellFromDiameter = cellArray->getDiameter(cellFromIndex);
     
     if (cellToDiameter < cellFromDiameter) {
@@ -80,6 +82,7 @@ float getConnectionWeight(int cellFromIndex, int cellToIndex, CellArray* cellArr
     
     return weight;
 }
+
 float calculateConnectionWeight(int cellFromIndex, int cellToIndex, CellArray* cellArray) {
     
     float weight = getConnectionWeight(cellFromIndex, cellToIndex, cellArray);

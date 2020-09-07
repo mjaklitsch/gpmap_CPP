@@ -13,20 +13,14 @@ public:
     int cell1Index;
     int cell2Index;
     
-    float xFrom;
-    float yFrom;
-    float xTo;
-    float yTo;
-    
     int cellFromIndex;
     int cellToIndex;
     
-    bool hasUncheckedNeuronalConnection;
-    bool connectionIsComplete;
+//    bool connectionIsComplete;
     
     Connection(int tempCellFromIndex, int tempCellToIndex, CellArray* tempCellArray);
     
-    void updateThisConnectionPosition();
+    void finalizeThisConnection();
     void setCellToAndCellFrom();
     
     bool isConnectionFromFirstToSecond(int first, int second);

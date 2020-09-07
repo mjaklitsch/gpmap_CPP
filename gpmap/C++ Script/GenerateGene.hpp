@@ -3,7 +3,7 @@
 
 #ifndef GENERATEGENE_H_INCLUDED
 #define GENERATEGENE_H_INCLUDED
-// double PI = 2*acos(0.0);
+
 // Genotype Generation Variables
 extern int minDuration;
 extern int maxDuration;

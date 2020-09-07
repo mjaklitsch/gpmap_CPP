@@ -63,7 +63,7 @@ void CellArray::printGenes(int index) {
     subArray.at(index).printGenes();
 }
 
-void CellArray::addIndexesOfConnectionToCells(int index1, int index2){
+void CellArray::addIndicesOfConnectionToCells(int index1, int index2){
     subArray.at(index1).addConnection(index2);
     subArray.at(index2).addConnection(index1);
 }

@@ -7,29 +7,8 @@
 
 using namespace timer;
 
-//int Cell::index = 0;
-//// ArrayList<Connection> cellConnections = new ArrayList<Connection>();
-//
-//Gene Cell::gene;
-//float Cell::xPos = {0.0};
-//float Cell::yPos;
-//float Cell::diameter;
-//float Cell::radius;
-//
-//float Cell::xSpeed;
-//float Cell::ySpeed;
-//float Cell::growthRate;
-//
-//bool Cell::doneMoving;
-//bool Cell::doneGrowing;
-
 Cell::Cell(){
 }
-
-//Cell::Cell(const Cell &C2){ //copy
-//    genotype = C2.genotype;
-//    index = C2.index;
-//}
 
 Cell::Cell(Gene tempGene, int tempIndex){
     gene = tempGene;
@@ -65,9 +44,6 @@ Cell::Cell(std::string cellType, int tempIndex) {
     connectedToSensor = false;
 }
 
-//Cell::~Cell(){
-//};
-
 bool Cell::isMotor() {
     if (getCellType() == "LM" || getCellType() == "RM") {
         return true;
@@ -93,7 +69,6 @@ bool Cell::isNeuron() {
 }
 
 void Cell::setCellSpeedAndGrowth() {
-//    (index == 0)? printf("current tick: %d \n", timer::currentTick):NULL;
     if(growthRate == 0){
         if (timer::currentTick > gene.getGrowthDelay()) {
             growthRate = (gene.getGrowthRate() / timer::actionSpread);

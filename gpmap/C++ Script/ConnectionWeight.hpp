@@ -9,10 +9,6 @@ float getConnectionWeight(int cellFromIndex, int cellToIndex, CellArray* cellArr
 
 int getConnectionDirection(int cellFromIndex, int cellToIndex, CellArray* cellArray);
 
-//float getConnectionWeight(Cell cellFrom, Cell cellTo);
-//
-//int getConnectionDirection(Cell cellFrom, Cell cellTo);
-
 bool inRange(float x, float range[]);
 
 #endif

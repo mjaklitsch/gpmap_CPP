@@ -44,4 +44,3 @@ int main(int argc, char* argv[]){
     printf("Execution time of program is %f seconds\n", time_span.count());
     return 0;
 }
-// g++ TimerVariables.o RunSimulation.o Cell.o ConnectionWeight.o SensorDot.o SensorArray.o Robot.o random.o PolygonCalculations.o Phenotype.o Connection.o Genotype.o GenerateGene.o main.o -o gpmap

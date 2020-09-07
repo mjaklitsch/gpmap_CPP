@@ -1,5 +1,5 @@
 #include "SensorArray.hpp"
-#include "Phenotype.hpp"
+#include "Genotype.hpp"
 #include "PolygonCalculations.hpp"
 #include "GlobalVariables.hpp"
 #include <cmath>
@@ -7,7 +7,7 @@
 #include <iostream>
 
 
-int numberOfSensors = 8; // 30 is the max for unknown reasons
+int numberOfSensors = 8;
 
 //std::vector<SensorDot> SensorArray::sensorDotArray;
 
@@ -15,11 +15,11 @@ SensorArray::SensorArray() {
     // nothing needed here yet, this class exists for organization
 }
 
-void SensorArray::recordIntersections(Phenotype *phenotype) {
+void SensorArray::recordSensorAttachments(Genotype *genotype) {
     for (int i = 0; i < global::numberOfCellsCreated; i++) {
-        if (!phenotype->cellArray.getConnectedToSensor(i)){
-            if (isCellOverlappingWithPolygon(i, &(phenotype->cellArray))) {
-                float tempTheta = phenotype->cellArray.getTheta(i);
+        if (!genotype->cellArray.getConnectedToSensor(i)){
+            if (isCellOverlappingWithPolygon(i, &(genotype->cellArray))) {
+                float tempTheta = genotype->cellArray.getTheta(i);
                 float theta;
                 if (tempTheta < 0) { // add 2 PI to get rid of negative theta
                     theta = tempTheta + (2 * M_PI);
@@ -27,28 +27,18 @@ void SensorArray::recordIntersections(Phenotype *phenotype) {
                     theta = tempTheta;
                 }
                 int sensorIndex = getIndexOfClosestSensorDotToTheta(theta);
-//                if (std::find(sensorDotArray[sensorIndex].connections.begin(),
-//                              sensorDotArray[sensorIndex].connections.end(),
-//                              i) == sensorDotArray[sensorIndex].connections.end()) { // if we dont find i in the connections that have been made
-                
-                phenotype->cellArray.setConnectedToSensor(i,true);
+                genotype->cellArray.setConnectedToSensor(i,true);
                 (sensorDotArray[sensorIndex].connections).emplace_back(i);
-//                }
             }
         }
     }
-    //    while(i<cellsInPhenotype)
-    //        //spin
-    //        ;
-    //    locks::moveCellsLock = 0;
-//    printf("g");
-    
 }
 
 float SensorArray::polygonalTriangleInnerAngle = 360 / numberOfSensors;
 float SensorArray::polygonalTriangleOuterAngle = (180 - polygonalTriangleInnerAngle) / 2; // only used for sensors
 
 void SensorArray::initializeSensors() {
+    // Build "numberOfSensors" sensor dots at even intervals around the polygon
     float lastX = 0;
     float lastY = 0;
     float x = 0;

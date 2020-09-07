@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <assert.h>
 
+// pulled directly from StackOverflow for use with randomization on calls that occur multiple times per second
 unsigned int mix(unsigned long a, unsigned long b, unsigned long c){
     a=a-b;  a=a-c;  a=a^(c >> 13);
     b=b-c;  b=b-a;  b=b^(a << 8);
@@ -17,6 +18,7 @@ unsigned int mix(unsigned long a, unsigned long b, unsigned long c){
 }
 
 int intRandom(int low, int high){
+    // StackOverflow code
     unsigned int seed = mix(clock(), time(NULL), getpid());
     srand(seed);
 //    std::cout<<seed;
@@ -30,6 +32,7 @@ int intRandom(int low, int high){
 }
 
 float floatRandom(float low, float high){
+    // StackOverflow code
     unsigned int seed = mix(clock(), time(NULL), getpid());
     srand(seed);
 //    std::cout<<seed;

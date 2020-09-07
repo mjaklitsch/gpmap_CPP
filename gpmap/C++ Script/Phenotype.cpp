@@ -1,4 +1,4 @@
-#include "Robot.hpp"
+#include "Phenotype.hpp"
 #include "GlobalVariables.hpp"
 #include <iostream>
 #include <iomanip>
@@ -7,9 +7,9 @@ void printIntegerMatrix(std::vector<std::vector<int> > integerMatrix) {
     if(global::printStuff){
         for (int i = 0; i < integerMatrix.size(); i++) {
             printf("%d: ", i);
-            long innerSize = integerMatrix[i].size();
+            long innerSize = integerMatrix.at(i).size();
             for (int j = 0; j < innerSize; j++) {
-                printf("[%d] ", integerMatrix[i][j]);
+                printf("[%d] ", integerMatrix.at(i).at(j));
             }
             printf("\n");
         }
@@ -26,9 +26,9 @@ void printFloatMatrix(std::vector<std::vector<float> > floatMatrix) {
         printf("\n");
         for (int i = 0; i < floatMatrix.size(); i++) {
             printf("%d: ", i);
-            long innerSize = floatMatrix[i].size();
+            long innerSize = floatMatrix.at(i).size();
             for (int j = 0; j < innerSize; j++) {
-                printf("[%f] ", floatMatrix[i][j]);
+                printf("[%f] ", floatMatrix.at(i).at(j));
             }
             printf("\n");
         }
@@ -49,9 +49,9 @@ void printboolMatrix(std::vector<std::vector<bool> > boolMatrix) {
         printf("\n");
         for (int i = 0; i < boolMatrix.size(); i++) {
             printf("%d: ", i);
-            long innerSize = boolMatrix[i].size();
+            long innerSize = boolMatrix.at(i).size();
             for (int j = 0; j < innerSize; j++) {
-                printf("%s", boolMatrix[i][j] ? " TRUE " : " false");
+                printf("%s", boolMatrix.at(i).at(j) ? " TRUE " : " false");
             }
             printf("\n");
         }
@@ -59,7 +59,7 @@ void printboolMatrix(std::vector<std::vector<bool> > boolMatrix) {
     }
 }
 
-Robot::Robot(SensorArray *tempSensorArray, Phenotype *tempPhenotype, CellArray *tempCellArray) {
+Phenotype::Phenotype(SensorArray *tempSensorArray, Genotype *tempPhenotype, CellArray *tempCellArray) {
     sensorArray = tempSensorArray;
     phenotype = tempPhenotype;
     cellArray = tempCellArray;
@@ -94,7 +94,7 @@ Robot::Robot(SensorArray *tempSensorArray, Phenotype *tempPhenotype, CellArray *
     }
     
     for (int i = 0; i < numberOfSensors; i++) {
-        std::vector<int> connectionArray = sensorArray->sensorDotArray[i].connections;
+        std::vector<int> connectionArray = sensorArray->sensorDotArray.at(i).connections;
         attachmentsBySensorIndex.push_back(connectionArray);
     }
     
@@ -103,18 +103,18 @@ Robot::Robot(SensorArray *tempSensorArray, Phenotype *tempPhenotype, CellArray *
     for (int x = 0; x < numberOfCells; x++) {
         for (int y = 0; y < numberOfCells; y++) {
             if (phenotype->hasSpecificDirectionalConnection(x, y)) {
-                cellConnections[x].emplace_back(true);
-                cellConnectionWeights[x].emplace_back(phenotype->getSpecificDirectionalConnectionWeight(x, y));
+                cellConnections.at(x).emplace_back(true);
+                cellConnectionWeights.at(x).emplace_back(phenotype->getSpecificDirectionalConnectionWeight(x, y));
             } else {
-                cellConnections[x].emplace_back(false);
-                cellConnectionWeights[x].emplace_back(0.0);
+                cellConnections.at(x).emplace_back(false);
+                cellConnectionWeights.at(x).emplace_back(0.0);
             }
         }
     }
 }
 
 
-void Robot::printRobot() {
+void Phenotype::printRobot() {
     if(global::printStuff){
         printf("Number of Cells: %d\n", numberOfCells);
         printf("Number of Neurons: %d\n", numberOfNeurons);

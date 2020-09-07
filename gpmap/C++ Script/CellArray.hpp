@@ -32,7 +32,7 @@ public:
     void setConnectedToSensor(int index, bool connected);
     void moveAndMorphCell(int index);
     void printGenes(int index);
-    void addIndexesOfConnectionToCells(int index1, int index2);
+    void addIndicesOfConnectionToCells(int index1, int index2);
     void printCellArray();
     
     float getTheta(int index);

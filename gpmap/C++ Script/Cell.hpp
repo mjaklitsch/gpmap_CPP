@@ -28,9 +28,7 @@ private:
 public:
     Cell();
     Cell(Gene tempGene, int tempIndex);
-    //    Cell(const Cell &C2);
     Cell(std::string cellType, int tempIndex);
-    //    ~Cell();
     
     bool isMotor();
     bool isSensor();

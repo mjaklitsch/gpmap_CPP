@@ -6,7 +6,7 @@
 #ifndef PHENOTYPE_H_INCLUDED
 #define PHENOTYPE_H_INCLUDED
 
-class Phenotype {
+class Genotype {
 public:
     static int numberOfCells;
     static std::vector<Connection> connectionVector;
@@ -14,7 +14,7 @@ public:
     
     // float partCost; // later implementation
     
-    Phenotype(int minNeurons, int maxNeurons, int minPhotoSensors,
+    Genotype(int minNeurons, int maxNeurons, int minPhotoSensors,
               int maxPhotoSensors, int minIRSensors, int maxIRSensors,
               int minLeftMotors, int maxLeftMotors, int minRightMotors,
               int maxRightMotors, bool testMode);
@@ -22,7 +22,7 @@ public:
     void addConnection(int i, int j);
     void moveCells();
     void recordIntersections();
-    void updateAllConnectionPositions();
+    void finalizeAllConnections();
     bool hasSpecificDirectionalConnection(int cellFromIndex, int cellToIndex);
     bool hasConnection(int cell1Index, int cell2Index);
     float getSpecificDirectionalConnectionWeight(int cellFromIndex, int cellToIndex);

@@ -1,5 +1,5 @@
 #include "SensorDot.hpp"
-#include "Phenotype.hpp"
+#include "Genotype.hpp"
 #include <vector>
 
 #ifndef SENSORARRAY_H_INCLUDED
@@ -13,7 +13,7 @@ public:
     
     SensorArray();
     
-    void recordIntersections(Phenotype *phenotype);
+    void recordSensorAttachments(Genotype *phenotype);
     
     static float polygonalTriangleInnerAngle;
     static float polygonalTriangleOuterAngle; // only used for sensors
