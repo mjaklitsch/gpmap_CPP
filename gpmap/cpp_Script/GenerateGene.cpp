@@ -20,40 +20,28 @@ int maxGrowthRate = 7;
 
 Gene returnRandomNewGenotype(std::string cellType) {
     std::string type = "";
-    
     if (cellType != "") {
         type = cellType;
-    } else { // on empty string input
+    } else { // on empty string input make new Gene
+        const std::string cellTypeOptions[] = {"N", "P", "R", "LM", "RM"};
         int typeNumber = intRandom(0,4);
-        switch(typeNumber) {
-            case 0:
-                type = "N";
-                break;
-            case 1:
-                type = "P";
-                break;
-            case 2:
-                type = "R";
-                break;
-            case 3:
-                type = "LM";
-                break;
-            case 4:
-                type = "RM";
-                break;
-        }
+        type = cellTypeOptions[typeNumber];
     }
     
     float theta;
     
-    if (type == "LM") {
+    if (type == "LM") { // set theta to corresponding region of unit circle
         theta = floatRandom((M_PI / 2), (3 * (M_PI / 2)));
-    } else if (type == "RM") {
+    } else if (type == "RM") { // set theta to corresponding region of unit circle
         theta = floatRandom(-(M_PI / 2), (M_PI / 2));
+        
+        // make theta positive so we can work with it
         if(theta < 0){
+            // yes, this is unnecessary math, however, it
+            // makes what I am doing much easier to understand
             theta+=(2*M_PI);
         }
-    } else {
+    } else { // unrestricted theta
         theta = floatRandom(0, (2*M_PI));
     }
     // these are defined in the main file

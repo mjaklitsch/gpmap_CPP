@@ -3,11 +3,7 @@
 #include <iostream>
 
 bool inRange(float x, float range[]) {
-    if (x >= range[0] && x < range[1]) {
-        return true;
-    } else {
-        return false;
-    }
+    return (x >= range[0] && x < range[1]);
 }
 
 int getConnectionDirection(int cellFromIndex, int cellToIndex, CellArray* cellArray) {
@@ -37,21 +33,27 @@ int getConnectionDirection(int cellFromIndex, int cellToIndex, CellArray* cellAr
     if (fromTheta <= M_PI) {
         rangeCounterClockwise[0] = fromTheta;
         rangeCounterClockwise[1] = fromTheta + M_PI;
+        
         rangeCounterClockwise2[0] = fromTheta;
         rangeCounterClockwise2[1] = fromTheta + M_PI;
         
+        
         rangeClockwise[0] = 0;
         rangeClockwise[1] = fromTheta;
+        
         rangeClockwise2[0] = fromTheta + M_PI;
         rangeClockwise2[1] = 2*M_PI;
     } else {
         rangeCounterClockwise[0] = fromTheta;
         rangeCounterClockwise[1] = 2*M_PI;
+        
         rangeCounterClockwise2[0] = 0;
         rangeCounterClockwise2[1] = fromTheta - M_PI;
         
+        
         rangeClockwise[0] = fromTheta - M_PI;
         rangeClockwise[1] = fromTheta;
+        
         rangeClockwise2[0] = fromTheta - M_PI;
         rangeClockwise2[1] = fromTheta;
     }

@@ -72,7 +72,7 @@ void CellArray::printCellArray(){
     if(global::printStuff){
         printf("\nC++ build of this execution\'s CellArray, go to CellArrayScaffold.cpp, paste output in CellArrayScaffold(),\nthen run in test mode by passing any argument to main to repeat this simulation.\n");
         printf("\nCellArray scaffoldCellArray;\n\n");
-        for (int i =0; i<subArray.size(); i++) {
+        for (int i = 0; i<subArray.size(); i++) {
             subArray.at(i).printCell(i);
             printf("scaffoldCellArray.add(C%d);\n", i);
         }

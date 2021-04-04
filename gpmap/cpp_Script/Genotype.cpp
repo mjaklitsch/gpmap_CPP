@@ -34,36 +34,26 @@ Genotype::Genotype(int minNeurons, int maxNeurons, int minPhotoSensors,
         int arrayIndex = 0;
         
         for (int i = 0; i < neurons; i++) {
-//            Cell nextCell = Cell("N", (arrayIndex + i));
-//            cellArray.add(nextCell);
             cellArray.emplace("N", (arrayIndex + i));
         }
         arrayIndex += neurons;
         
         for (int i = 0; i < photoSensors; i++) {
-//            Cell nextCell = Cell("P", (arrayIndex + i));
-//            cellArray.add(nextCell);
             cellArray.emplace("P", (arrayIndex + i));
         }
         arrayIndex += photoSensors;
         
         for (int i = 0; i < irSensors; i++) {
-//            Cell nextCell = Cell("R", (arrayIndex + i));
-//            cellArray.add(nextCell);
             cellArray.emplace("R", (arrayIndex + i));
         }
         arrayIndex += irSensors;
         
         for (int i = 0; i < leftMotors; i++) {
-//            Cell nextCell = Cell("LM", (arrayIndex + i));
-//            cellArray.add(nextCell);
             cellArray.emplace("LM", (arrayIndex + i));
         }
         arrayIndex += leftMotors;
         
         for (int i = 0; i < rightMotors; i++) {
-//            Cell nextCell = Cell("RM", (arrayIndex + i));
-//            cellArray.add(nextCell);
             cellArray.emplace("RM", (arrayIndex + i));
         }
         arrayIndex += rightMotors;
@@ -85,22 +75,33 @@ void Genotype::moveCells() {
 void Genotype::recordIntersections() {
     for (int i = 0; i < numberOfCells; i++) {
         for (int j = i+1; j < numberOfCells; j++) {
-            if(((!cellArray.getCell(i).getDoneMoving() || !cellArray.getCell(i).getDoneGrowing()) || // If both have not stopped moving and growing
-                 (!cellArray.getCell(j).getDoneMoving() || !cellArray.getCell(j).getDoneGrowing())) &&
-                ((cellArray.getCell(i).getDiameter() > 0) && (cellArray.getCell(j).getDiameter() > 0)) && // and if both have spawned
-               !((cellArray.isMotor(i) && cellArray.isMotor(j)) ||
-                 (cellArray.isSensor(i) && cellArray.isSensor(j)))){ // and if a connection between types is possible
+            
+            // snake case was much more readable here
+            Cell cell_i = cellArray.getCell(i);
+            Cell cell_j = cellArray.getCell(j);
+            
+            // if cell_i has not stopped moving and growing
+            // or cell_j has not stopped moving and growing
+            bool isMovingOrGrowing = (!cell_i.getDoneMoving() || !cell_i.getDoneGrowing()
+                                      || !cell_j.getDoneMoving() || !cell_j.getDoneGrowing());
+            
+            // if both have started growing
+            bool bothHaveSpawned = (cell_i.getDiameter() > 0) && (cell_j.getDiameter() > 0);
+            
+            // if a connection between types is possible
+            bool isConnectionPossible = !((cell_i.isMotor() && cell_j.isMotor()) ||
+                                          (cell_i.isSensor() && cell_j.isSensor()));
+            
+            if(isMovingOrGrowing && bothHaveSpawned && isConnectionPossible){
                 
-                float ixPos = cellArray.getXPos(i);
-                float iyPos = cellArray.getYPos(i);
-                float jxPos = cellArray.getXPos(j);
-                float jyPos = cellArray.getYPos(j);
+                float ixPos = cell_i.getXPos();
+                float iyPos = cell_i.getYPos();
+                float jxPos = cell_j.getXPos();
+                float jyPos = cell_j.getYPos();
                 
-                if ((cellArray.getRadius(i) + cellArray.getRadius(j)) > distanceBetween(ixPos, iyPos, jxPos, jyPos)) {
-                    // if the two are overlapping
-                    if (!hasConnection(i, j)) { // if no connection has been recorded yet
-                        addConnection(i, j);
-                    }
+                if ((cell_i.getRadius() + cell_j.getRadius()) > distanceBetween(ixPos, iyPos, jxPos, jyPos)) {
+                    // if the two are overlapping, connect them
+                    if (!hasConnection(i, j)) {addConnection(i, j);}
                 }
             }
         }
@@ -128,18 +129,16 @@ bool Genotype::hasSpecificDirectionalConnection(int cellFromIndex, int cellToInd
 }
 
 bool Genotype::hasConnection(int cell1Index, int cell2Index) {
-    if(cellArray.isFirstIndexConnectedToSecondIndex(cell1Index, cell2Index)){
-        return true;
-    }
-    // else return false as no connection exists yet
-    return false;
+    // this function just really needed a Genotype class shorthand
+    return cellArray.isFirstIndexConnectedToSecondIndex(cell1Index, cell2Index);
 }
 
 float Genotype::getSpecificDirectionalConnectionWeight(int cellFromIndex, int cellToIndex) {
     long links = connectionVector.size();
     for (int i = 0; i < links; i++) {
-        if (connectionVector.at(i).isConnectionFromFirstToSecond(cellFromIndex, cellToIndex)) {
-            return connectionVector.at(i).connectionWeight;
+        Connection thisConnection = connectionVector.at(i);
+        if (thisConnection.isConnectionFromFirstToSecond(cellFromIndex, cellToIndex)) {
+            return thisConnection.connectionWeight;
         }
     }
     printf("This should never print, check getSpecificDirectionalConnectionWeight() for mistakes"); 

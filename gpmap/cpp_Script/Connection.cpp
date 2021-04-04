@@ -33,17 +33,10 @@ void Connection::setCellToAndCellFrom() {
 }
 
 bool Connection::isConnectionFromFirstToSecond(int first, int second) {
-    if (cellFromIndex == first && cellToIndex == second) {
-        return true;
-    } else {
-        return false;
-    }
+    return cellFromIndex == first && cellToIndex == second;
 }
 
 bool Connection::doesConnectionExist(int first, int second){
-    if ((cell1Index == first && cell2Index == second) || (cell1Index == second && cell2Index == first)) {
-        return true;
-    } else {
-        return false;
-    }
+    return (cell1Index == first && cell2Index == second)
+            || (cell1Index == second && cell2Index == first);
 }

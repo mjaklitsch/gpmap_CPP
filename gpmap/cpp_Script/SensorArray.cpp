@@ -17,19 +17,12 @@ SensorArray::SensorArray() {
 
 void SensorArray::recordSensorAttachments(Genotype *genotype) {
     for (int i = 0; i < global::numberOfCellsCreated; i++) {
-        if (!genotype->cellArray.getConnectedToSensor(i)){
-            if (isCellOverlappingWithPolygon(i, &(genotype->cellArray))) {
-                float tempTheta = genotype->cellArray.getTheta(i);
-                float theta;
-                if (tempTheta < 0) { // add 2 PI to get rid of negative theta
-                    theta = tempTheta + (2 * M_PI);
-                } else {
-                    theta = tempTheta;
-                }
-                int sensorIndex = getIndexOfClosestSensorDotToTheta(theta);
-                genotype->cellArray.setConnectedToSensor(i,true);
-                (sensorDotArray[sensorIndex].connections).emplace_back(i);
-            }
+        if (!genotype->cellArray.getConnectedToSensor(i) && isCellOverlappingWithPolygon(i, &(genotype->cellArray))){
+            float tempTheta = genotype->cellArray.getTheta(i);
+            float theta = (tempTheta < 0)? tempTheta + (2 * M_PI): tempTheta; // add 2 PI to get rid of negative theta
+            int sensorIndex = getIndexOfClosestSensorDotToTheta(theta);
+            genotype->cellArray.setConnectedToSensor(i,true);
+            (sensorDotArray[sensorIndex].connections).emplace_back(i);
         }
     }
 }

@@ -1,4 +1,4 @@
-#include "RunSimulation.hpp"
+#include "cpp_Script/RunSimulation.hpp"
 #include <iostream>
 #include <chrono>
 
@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     int minNeurons = 2;
     int minPhotosensors = 2;
     int minIRSensors = 2;
-    int minLeftMotors = 1;
+    int minLeftMotors = -1;
     int minRightMotors = 1;
     
     int maxNeurons = 4;
@@ -22,13 +22,10 @@ int main(int argc, char* argv[]){
     int maxLeftMotors = 1;
     int maxRightMotors = 1;
     bool testMode;
-    if(argc > 1){
-        testMode = true;
-        printf("TEST MODE!%d\n",argc);
-    } else {
-        testMode = false;
-    }
     
+    testMode = (argc > 1);
+    
+//    Sim simulator = Sim();
     runSimulation(minNeurons, maxNeurons, minPhotosensors,
                   maxPhotosensors, minIRSensors, maxIRSensors,
                   minLeftMotors, maxLeftMotors, minRightMotors,

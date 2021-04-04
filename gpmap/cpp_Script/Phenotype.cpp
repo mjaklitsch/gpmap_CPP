@@ -2,6 +2,7 @@
 #include "GlobalVariables.hpp"
 #include <iostream>
 #include <iomanip>
+#include <map>
 
 void printIntegerMatrix(std::vector<std::vector<int> > integerMatrix) {
     if(global::printStuff){
@@ -72,25 +73,53 @@ Phenotype::Phenotype(SensorArray *tempSensorArray, Genotype *tempPhenotype, Cell
     numberOfRightMotors = 0;
     numberOfLeftMotors = 0;
     
+    const map<std::string, int> cellTypeMap = {{"N",0},{"R",1},{"P",2},{"LM",3},{"RM",4},{"",5}};
+    
     for (int i = 0; i < global::numberOfCellsCreated; i++) {
         //        std::cout<< cellArray->getCell(i).getCellType();
         //        printf(" :  %d.  ", i);
-        if(cellArray->getCell(i).getCellType() == "N") {
-            numberOfNeurons++;
-            numberOfCells++;
-        } else if(cellArray->getCell(i).getCellType() == "R"){
-            numberOfIRSensors++;
-            numberOfCells++;
-        } else if(cellArray->getCell(i).getCellType() == "P"){
-            numberOfPhotoSensors++;
-            numberOfCells++;
-        } else if(cellArray->getCell(i).getCellType() == "LM"){
-            numberOfLeftMotors++;
-            numberOfCells++;
-        } else if(cellArray->getCell(i).getCellType() == "RM"){
-            numberOfRightMotors++;
-            numberOfCells++;
+        
+        int cellTypeInteger = cellTypeMap.at(cellArray->getCell(i).getCellType());
+        switch (cellTypeInteger) {
+            case 0:
+                numberOfNeurons++;
+                break;
+            case 1:
+                numberOfIRSensors++;
+                break;
+            case 2:
+                numberOfPhotoSensors++;
+                break;
+            case 3:
+                numberOfLeftMotors++;
+                break;
+            case 4:
+                numberOfRightMotors++;
+                break;
+            default:
+                numberOfCells--; // counters the following ++ but this shouldnt be reachable anyways
+                printf("hitting default switch in phenotype constructor, ya broke something mate");
+                break;
         }
+        
+        numberOfCells++;
+        
+//        if(cellArray->getCell(i).getCellType() == "N") {
+//            numberOfNeurons++;
+//            numberOfCells++;
+//        } else if(cellArray->getCell(i).getCellType() == "R"){
+//            numberOfIRSensors++;
+//            numberOfCells++;
+//        } else if(cellArray->getCell(i).getCellType() == "P"){
+//            numberOfPhotoSensors++;
+//            numberOfCells++;
+//        } else if(cellArray->getCell(i).getCellType() == "LM"){
+//            numberOfLeftMotors++;
+//            numberOfCells++;
+//        } else if(cellArray->getCell(i).getCellType() == "RM"){
+//            numberOfRightMotors++;
+//            numberOfCells++;
+//        }
     }
     
     for (int i = 0; i < numberOfSensors; i++) {
