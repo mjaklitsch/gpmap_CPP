@@ -1,7 +1,9 @@
 # G-P Mapping Scheme Documentation by File
 This is not a walkthrough of each function, it is a basic description of the purpose and methods used
-in each file. A lot of effort was put into making each function name self explanatory however, where
-that falls short, additional comments in-line should help.
+in each file(at least the ones I got to. A lot of effort was put into making each function name self 
+explanatory however, where that falls short, additional comments in-line should help. I am well aware 
+this is poor practice and I do apologize for past me, but since I am no longer a part of this project 
+I will leave that for future researchers to fix. 
 
 ## CellArrayScaffold.cpp
 
