@@ -16,47 +16,58 @@ CellArray Genotype::cellArray;
 Genotype::Genotype(int minNeurons, int maxNeurons, int minPhotoSensors,
                      int maxPhotoSensors, int minIRSensors, int maxIRSensors,
                      int minLeftMotors, int maxLeftMotors, int minRightMotors,
-                     int maxRightMotors, bool testMode) {
+                     int maxRightMotors, bool testMode) { // probably should be changed to int[]
     if(testMode){
         cellArray = cellArrayScaffold();
         numberOfCells = cellArray.getSize();
         global::numberOfCellsCreated = numberOfCells; //global record
     } else{
         
+//         int neurons = intRandom(minNeurons, maxNeurons);
+//         int photoSensors = intRandom(minPhotoSensors, maxPhotoSensors);
+//         int irSensors = intRandom(minIRSensors, maxIRSensors);
+//         int leftMotors = intRandom(minLeftMotors, maxLeftMotors);
+//         int rightMotors = intRandom(minRightMotors, maxRightMotors);
+      
         int neurons = intRandom(minNeurons, maxNeurons);
-        int photoSensors = intRandom(minPhotoSensors, maxPhotoSensors);
-        int irSensors = intRandom(minIRSensors, maxIRSensors);
-        int leftMotors = intRandom(minLeftMotors, maxLeftMotors);
-        int rightMotors = intRandom(minRightMotors, maxRightMotors);
+        int photoSensors = intRandom(neurons+minPhotoSensors, neurons+maxPhotoSensors);
+        int irSensors = intRandom(photoSensors+minIRSensors, photoSensors+maxIRSensors);
+        int leftMotors = intRandom(irSensors+minLeftMotors, irSensors+maxLeftMotors);
+        int rightMotors = intRandom(leftMotors+minRightMotors, leftMotors+maxRightMotors);
         
-        numberOfCells = neurons + photoSensors + irSensors + leftMotors + rightMotors;
-        global::numberOfCellsCreated = numberOfCells; //global record
-        int arrayIndex = 0;
-        
-        for (int i = 0; i < neurons; i++) {
-            cellArray.emplace("N", (arrayIndex + i));
+        global::numberOfCellsCreated = rightMotors; //global record
+      
+//         numberOfCells = neurons + photoSensors + irSensors + leftMotors + rightMotors;
+//         global::numberOfCellsCreated = numberOfCells; //global record
+//         int arrayIndex = 0;
+      
+        for (int i = 0; i < rightMotors; i++){
+            if (i < neurons){
+                cellArray.emplace("N", i);
+            } else if (i < photoSensors){
+                cellArray.emplace("P", i);
+            } else if (i < irSensors){
+                cellArray.emplace("R", i);
+            } else if (i < leftMotors){
+                cellArray.emplace("LM", i);
+            } else {
+                cellArray.emplace("RM", i);
+            }
         }
-        arrayIndex += neurons;
-        
-        for (int i = 0; i < photoSensors; i++) {
-            cellArray.emplace("P", (arrayIndex + i));
-        }
-        arrayIndex += photoSensors;
-        
-        for (int i = 0; i < irSensors; i++) {
-            cellArray.emplace("R", (arrayIndex + i));
-        }
-        arrayIndex += irSensors;
-        
-        for (int i = 0; i < leftMotors; i++) {
-            cellArray.emplace("LM", (arrayIndex + i));
-        }
-        arrayIndex += leftMotors;
-        
-        for (int i = 0; i < rightMotors; i++) {
-            cellArray.emplace("RM", (arrayIndex + i));
-        }
-        arrayIndex += rightMotors;
+      
+//         for (int i = 0; i < numberOfCells; i++){
+//             if (i < neurons){
+//                 cellArray.emplace("N", i);
+//             } else if (i < neurons + photoSensors){
+//                 cellArray.emplace("P", i);
+//             } else if (i < neurons + photoSensors + irSensors){
+//                 cellArray.emplace("R", i);
+//             } else if (i < neurons + photoSensors + irSensors + leftMotors){
+//                 cellArray.emplace("LM", i);
+//             } else {
+//                 cellArray.emplace("RM", i);
+//             }
+//         }
     }
 }
 
